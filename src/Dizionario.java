@@ -1,28 +1,13 @@
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Dizionario {
 
-    static public enum Lang {
-
-        EN, IT
-    };
-
     static HashMap<String, int[]> dizionario;
     static private Tokenizer_EN tokenizerEN;
 
-    // flag per effettuare la tokenizzazione italiana tramite babelnet id's
-    // piuttosto che
-    // lemmi
-    static private boolean babel;
-
-    public Dizionario(boolean flag, Lang language) {
-        babel = flag;
+    public Dizionario() {
         dizionario = new HashMap<>();
 
         tokenizerEN = new Tokenizer_EN();

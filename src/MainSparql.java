@@ -9,11 +9,7 @@ import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.Selector;
-import com.hp.hpl.jena.rdf.model.SimpleSelector;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.FileManager;
-import com.hp.hpl.jena.vocabulary.DC;
 import java.io.InputStream;
 
 public class MainSparql {
@@ -32,30 +28,13 @@ public class MainSparql {
 
         // read the RDF/XML file
         model.read(in, null);
-        queryCreator("Topo Gigio",model);
+        queryCreator("Topo Gigio", model);
         System.out.println("============================");
         queryDescription("Bank of Ireland to raise 3.4bn euros.", model);
-//		// write it to standard out
-//        //model.write(System.out);
-//        Selector selector = new SimpleSelector(null, DC.creator, "Topo Gigio");
-//        StmtIterator listStatements = model.listStatements(selector);
-//        Model m = model.query(selector); 
-//        m.write(System.out);
-       // while(listStatements.hasNext())
-       // {
-           // Resource r = listStatements.nextStatement().getSubject();
-            
-        //}
-//        List<Statement> statements = listStatements.toList();
-//        for(int i = 0; i < statements.size(); i++)
-//        {
-//            System.out.println(statements.get(i));
-//        }
-        
     }
-    
-       //creo la query per cercare tramite creatore
-    public static void queryCreator(String creator , Model model) {
+
+    //creo la query per cercare tramite creatore
+    public static void queryCreator(String creator, Model model) {
         String queryString = "PREFIX dc:  <http://purl.org/dc/elements/1.1/> SELECT ?doc ?title "
                 + "WHERE { ?doc dc:creator \"" + creator + "\" . ?doc dc:title ?title .}";
         Query query = QueryFactory.create(queryString);
@@ -66,16 +45,16 @@ public class MainSparql {
             for (; results.hasNext();) {
                 QuerySolution soln = results.nextSolution();
                 RDFNode x = soln.get("doc");
-                Literal l = soln.getLiteral("title");   
+                Literal l = soln.getLiteral("title");
                 System.out.println("Document\n" + x + "\nTitle\n" + l + "\n-----");
             }
         } finally {
             qexec.close();
         }
     }
-    
+
     //creo la query per cercare tramite descrizione
-    public static void queryDescription(String title , Model model) {
+    public static void queryDescription(String title, Model model) {
         String queryString = "PREFIX dc:  <http://purl.org/dc/elements/1.1/> SELECT ?doc ?description "
                 + "WHERE { ?doc dc:title \"" + title + "\" . ?doc dc:description ?description .}";
         Query query = QueryFactory.create(queryString);

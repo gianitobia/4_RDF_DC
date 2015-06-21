@@ -1,4 +1,8 @@
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.DC;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,13 +10,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.DC;
-import java.util.Arrays;
 
 public class MainRDF {
 
@@ -79,7 +76,7 @@ public class MainRDF {
             }
         }
 
-        Dizionario dizionario = new Dizionario(false, Dizionario.Lang.EN);
+        Dizionario dizionario = new Dizionario();
         dizionario.generaDizionario(source);
         String[] parole = dizionario.getDizionario();
         double[][] tfMatrix = calcolaTFMatrix(dizionario, source);
@@ -99,7 +96,6 @@ public class MainRDF {
 
             r.addProperty(DC.source, source.get(i));
 
-            //TODO: cambiare text con le prime 3 parole della FV
             r.addProperty(DC.subject, subject.get(i));
 
             r.addProperty(DC.creator, creator.get(i));
@@ -124,7 +120,9 @@ public class MainRDF {
     public static ArrayList<File> listFilesForFolder(final File folder) {
         ArrayList<File> files = new ArrayList<>();
         for (final File fileEntry : folder.listFiles()) {
-            files.add(fileEntry);
+            if (!fileEntry.getName().equals(".DS_Store")) {
+                files.add(fileEntry);
+            }
         }
         return files;
     }
