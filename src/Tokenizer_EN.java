@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+/**
+ *
+ * @author Tobia Giani, Salvo Cirinà
+ */
 public class Tokenizer_EN {
 
     static StanfordCoreNLP pipeline;

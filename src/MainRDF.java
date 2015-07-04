@@ -11,6 +11,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Tobia Giani, Salvo Cirinà
+ */
 public class MainRDF {
 
     public static void main(String[] args) {

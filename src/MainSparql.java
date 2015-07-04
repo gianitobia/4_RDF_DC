@@ -12,6 +12,10 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.util.FileManager;
 import java.io.InputStream;
 
+/**
+ *
+ * @author Tobia Giani, Salvo Cirinà
+ */
 public class MainSparql {
 
     public static void main(String[] args) {

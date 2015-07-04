@@ -2,6 +2,10 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ *
+ * @author Tobia Giani, Salvo Cirinà
+ */
 public class Dizionario {
 
     static HashMap<String, int[]> dizionario;
